@@ -8,6 +8,6 @@ trait HasRoles
 {
     public function roles()
     {
-        return $this->hasMany(config('permissions.models.roles'));
+        return $this->hasMany(config('permissions.models.roles'), config('permissions.tables.roles'));
     }
 }

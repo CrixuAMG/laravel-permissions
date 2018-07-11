@@ -16,6 +16,7 @@ class PermissionServiceProvider extends ServiceProvider
         // Allow the user to get the config file
         $this->registerConfiguration();
     }
+
     /**
      * @throws \Throwable
      */
@@ -23,6 +24,7 @@ class PermissionServiceProvider extends ServiceProvider
     {
 
     }
+
     /**
      * Register console commands
      */
@@ -34,6 +36,7 @@ class PermissionServiceProvider extends ServiceProvider
             ]);
         }
     }
+
     /**
      * Register the config file
      */

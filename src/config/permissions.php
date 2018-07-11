@@ -7,22 +7,22 @@ return [
     'cache_enabled' => true,
 
     // The amount of minutes the permissions will be cached if caching is enabled
-    'cache_time' => 60,
+    'cache_time'    => 60,
 
     'tables' => [
         'permissions' => 'permissions',
-        'roles' => 'roles',
+        'roles'       => 'roles',
     ],
 
     'models' => [
-        'permissions' => Permission,
-        'roles' => Role,
+        'permissions' => Permission::class,
+        'roles'       => Role::class,
     ],
 
     'roles' => [
         // Register any roles here, recommended is to use class constants to have a single declaration of role names
-        'admin' => trans('roles.admin'),
+        'admin'     => trans('roles.admin'),
         'moderator' => trans('roles.moderator'),
-        'member' => trans('roles.member'),
+        'member'    => trans('roles.member'),
     ],
 ];
