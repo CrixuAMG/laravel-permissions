@@ -1,0 +1,13 @@
+{
+    "name": "christian/laravel-permissions",
+    "description": "Based on the popular spatie/laravel-permission package, with handy additions for easier creation and usage of permissions.",
+    "require": {
+        "laravel/framework": "^5.0"
+    },
+    "authors": [
+        {
+            "name": "Christian",
+            "email": "christian@freshapple.nl"
+        }
+    ]
+}
