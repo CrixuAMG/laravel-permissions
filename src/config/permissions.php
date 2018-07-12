@@ -9,6 +9,8 @@ return [
     // The amount of minutes the permissions will be cached if caching is enabled
     'cache_time'    => 60,
 
+    'role_pefix' => 'ROLE_',
+
     'tables' => [
         'permissionables' => 'permissionables',
         'roleables'       => 'roleables',
@@ -23,8 +25,8 @@ return [
 
     'roles' => [
         // Register any roles here, recommended is to use class constants to have a single declaration of role names
-        'admin'     => trans('roles.admin'),
-        'moderator' => trans('roles.moderator'),
-        'member'    => trans('roles.member'),
+        'admin',
+        'moderator',
+        'member',
     ],
 ];

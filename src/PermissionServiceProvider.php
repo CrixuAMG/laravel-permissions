@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\Permissions;
 
+use CrixuAMG\Permissions\Services\RoleDefiner;
 use Illuminate\Support\ServiceProvider;
 
 class PermissionServiceProvider extends ServiceProvider
@@ -22,6 +23,8 @@ class PermissionServiceProvider extends ServiceProvider
         $this->registerConfiguration();
         // Allow the user to get the migration file
         $this->registerMigration();
+
+        $this->registerRoles();
     }
 
     /**
@@ -66,5 +69,10 @@ class PermissionServiceProvider extends ServiceProvider
                 __DIR__ . '/database/migrations/create_permissions_tables.php.stub' => $this->app->databasePath() . "/migrations/{$timestamp}_create_permissions_tables.php",
             ], 'migrations');
         }
+    }
+
+    private function registerRoles()
+    {
+        RoleDefiner::defineAll(config('permissions.role_pefix'));
     }
 }
