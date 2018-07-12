@@ -23,8 +23,8 @@ return [
 
     'roles' => [
         // Register any roles here, recommended is to use class constants to have a single declaration of role names
-        'admin'     => trans('roles.admin', 'admin'),
-        'moderator' => trans('roles.moderator', 'moderator'),
-        'member'    => trans('roles.member', 'member'),
+        'admin'     => trans('roles.admin'),
+        'moderator' => trans('roles.moderator'),
+        'member'    => trans('roles.member'),
     ],
 ];

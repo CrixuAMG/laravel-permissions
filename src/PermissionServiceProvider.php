@@ -11,6 +11,11 @@ class PermissionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadTranslationsFrom(
+            __DIR__ . '/resources/translations',
+            'permissions'
+        );
+
         // Register the commands
         // $this->registerCommands();
         // Allow the user to get the config file
