@@ -15,6 +15,8 @@ class PermissionServiceProvider extends ServiceProvider
         // $this->registerCommands();
         // Allow the user to get the config file
         $this->registerConfiguration();
+        // Allow the user to get the migration file
+        $this->registerMigration();
     }
 
     /**
@@ -45,5 +47,19 @@ class PermissionServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/config/permissions.php' => config_path('permissions.php'),
         ]);
+    }
+
+    /**
+     * Register the config file
+     */
+    private function registerMigration()
+    {
+        if (!class_exists('CreatePermissionsTables')) {
+            $timestamp = date('Y_m_d_His', time());
+
+            $this->publishes([
+                __DIR__ . '/database/migrations/create_permissions_tables.php.stub' => $this->app->databasePath() . "/migrations/{$timestamp}_create_permissions_tables.php",
+            ], 'migrations');
+        }
     }
 }
