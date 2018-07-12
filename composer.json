@@ -1,13 +1,35 @@
 {
-    "name": "crixuamg/laravel-permissions",
-    "description": "Based on the popular spatie/laravel-permission package, with handy additions for easier creation and usage of permissions.",
-    "require": {
-        "laravel/framework": "^5.0"
-    },
-    "authors": [
-        {
-            "name": "Christian",
-            "email": "christiankaal@gmail.com"
-        }
-    ]
+  "name": "crixuamg/laravel-permissions",
+  "description": "Based on the popular spatie/laravel-permission package, with handy additions for easier creation and usage of permissions.",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "laravel",
+    "permissions",
+    "roles"
+  ],
+  "require": {
+    "php": ">=7.0",
+    "laravel/framework": "5.*"
+  },
+  "authors": [
+    {
+      "name": "Christian",
+      "email": "christiankaal@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "CrixuAMG\\Permissions\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "CrixuAMG\\Permissions\\PermissionServiceProvider"
+      ]
+    }
+  }
 }
