@@ -5,6 +5,10 @@ namespace CrixuAMG\Permissions;
 use CrixuAMG\Permissions\Services\RoleDefiner;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class PermissionServiceProvider
+ * @package CrixuAMG\Permissions
+ */
 class PermissionServiceProvider extends ServiceProvider
 {
     /**
@@ -71,6 +75,9 @@ class PermissionServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * Defines all registered roles as constants
+     */
     private function registerRoles()
     {
         RoleDefiner::defineAll(config('permissions.role_pefix'));
