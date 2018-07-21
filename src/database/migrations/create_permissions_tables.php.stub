@@ -13,43 +13,53 @@ class CreatePermissionsTables extends Migration
      */
     public function up()
     {
-        Schema::create(config('permissions.tables.roles'), function (Blueprint $table) {
+        Schema::create(config('permissions.tables.permissions'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('guard_name');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
 
-        Schema::create($tableNames['roles'], function (Blueprint $table) {
+        Schema::create(config('permissions.tables.roles'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('display_name');
             $table->string('guard_name');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
 
-        Schema::create(config('permission.tables.permissionables'), function (Blueprint $table) use ($tableNames) {
+        Schema::create(config('permissions.tables.permissionables'), function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
-            $table->morphs('model');
+            $table->morphs('permissionable');
 
             $table->foreign('permission_id')
+                ->references('id')
+                ->on(config('permissions.tables.permissions'))
+                ->onDelete('cascade');
+
+            $table->primary([
+                'permission_id',
+                'permissionable_id',
+                'permissionable_type',
+            ]);
+        });
+
+        Schema::create(config('permissions.tables.roleables'), function (Blueprint $table) {
+            $table->integer('role_id')->unsigned();
+            $table->morphs('roleable');
+
+            $table->foreign('role_id')
                 ->references('id')
                 ->on(config('permissions.tables.roles'))
                 ->onDelete('cascade');
 
-            $table->primary(['permission_id', 'model_id', 'model_type']);
-        });
-
-        Schema::create(config('permission.tables.roleables'), function (Blueprint $table) use ($tableNames) {
-            $table->integer('role_id')->unsigned();
-            $table->morphs('model');
-
-            $table->foreign('role_id')
-                ->references('id')
-                ->on($tableNames['roles'])
-                ->onDelete('cascade');
-
-            $table->primary(['role_id', 'model_id', 'model_type']);
+            $table->primary([
+                'role_id',
+                'roleable_id',
+                'roleable_type',
+            ]);
         });
     }
 
@@ -60,9 +70,9 @@ class CreatePermissionsTables extends Migration
      */
     public function down()
     {
-        Schema::drop(config('permission.tables.roleables'));
-        Schema::drop(config('permission.tables.permissionables'));
-        Schema::drop(config('permission.tables.roles'));
-        Schema::drop(config('permission.tables.permissions'));
+        Schema::drop(config('permissions.tables.roleables'));
+        Schema::drop(config('permissions.tables.permissionables'));
+        Schema::drop(config('permissions.tables.roles'));
+        Schema::drop(config('permissions.tables.permissions'));
     }
 }

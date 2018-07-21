@@ -24,18 +24,16 @@ class RoleDefiner
      * @param        $role
      * @param string $prefix
      */
-    private static function define(string $role, string $prefix = 'ROLE_')
+    public static function define(string $role, string $prefix = 'ROLE_')
     {
         $constName = sprintf(
             '%s%s',
             $prefix,
-            studly_case($role)
+            strtoupper($role)
         );
 
-        dump($constName);
-
         if (!defined($constName)) {
-            define($constName);
+            define($constName, $role);
         }
     }
 }
