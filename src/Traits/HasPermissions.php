@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\Permissions\Traits;
 use CrixuAMG\Permissions\Services\BasePermission;
+use CrixuAMG\Permissions\Services\BaseRole;
 
 /**
  * Trait HasPermissions
@@ -36,7 +37,7 @@ trait HasPermissions
             return $this->permissions->contains('name', $permissions);
         }
 
-        if ($permissions instanceof Role) {
+        if ($permissions instanceof BaseRole) {
             return $this->permissions->contains('id', $permissions->id);
         }
 

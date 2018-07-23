@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\Permissions\Traits;
 
+use CrixuAMG\Permissions\Exceptions\RoleModelNotFoundException;
 use CrixuAMG\Permissions\Models\Role;
 use CrixuAMG\Permissions\Services\BaseRole;
 
@@ -40,7 +41,7 @@ trait HasRoles
             return $this->roles->contains('name', $roles);
         }
 
-        if ($roles instanceof Role) {
+        if ($roles instanceof BaseRole) {
             return $this->roles->contains('id', $roles->id);
         }
 
@@ -108,6 +109,7 @@ trait HasRoles
      * @param $role
      *
      * @return mixed
+     * @throws RoleModelNotFoundException
      */
     public function getRoleModel($role)
     {
