@@ -2,7 +2,7 @@
 
 namespace CrixuAMG\Permissions;
 
-use CrixuAMG\Console\Commands\RolePermissionTableCommand;
+use CrixuAMG\Permissions\Console\Commands\RolePermissionTableCommand;
 use CrixuAMG\Permissions\Services\RoleDefiner;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,6 +30,8 @@ class PermissionServiceProvider extends ServiceProvider
         $this->registerMigration();
 
         $this->registerRoles();
+
+        $this->registerCommands();
     }
 
     /**
