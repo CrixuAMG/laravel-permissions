@@ -81,7 +81,10 @@ abstract class AbstractPermissionSeeder extends Seeder
             $role->permissions()->detach();
 
             foreach ($assignedPermissions as $permission) {
-                $role->permissions()->attach($permission);
+                $role->permissions()->attach(config('permissions.models.permissions')::firstOrCreate([
+                    'name'       => sprintf('%s:update', $permission),
+                    'guard_name' => config('permissions.guards.default'),
+                ]));
             }
 
             $users->each(function ($user) use ($role) {

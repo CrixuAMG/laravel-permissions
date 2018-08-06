@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\Permissions;
 
+use CrixuAMG\Console\Commands\RolePermissionTableCommand;
 use CrixuAMG\Permissions\Services\RoleDefiner;
 use Illuminate\Support\ServiceProvider;
 
@@ -46,7 +47,7 @@ class PermissionServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                // TODO: add db:seed --class=CrixuAMG\Permissions\Database\Seeders\PermissionSeeder
+                RolePermissionTableCommand::class,
             ]);
         }
     }
