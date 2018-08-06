@@ -84,7 +84,7 @@ abstract class AbstractPermissionSeeder extends Seeder
 
             foreach ($assignedPermissions as $permission) {
                 // First check if the role does not have the permission already
-                if (!$role->hasPermissionTo($permission)) {
+                if (!$role->hasPermission($permission)) {
                     $permission = $permission instanceof $permissionModel
                         ? $permission->name
                         : $permission;
