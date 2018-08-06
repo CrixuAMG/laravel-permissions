@@ -53,11 +53,9 @@ class RolePermissionTableCommand extends Command
                 $permission->name,
             ];
             foreach ($roles as $role) {
-                if ($role->permissions->contains('name', $permission->name)) {
-                    $rowData[] = 'yes';
-                } else {
-                    $rowData[] = 'no';
-                }
+                $rowData[] = $role->permissions->contains('name', $permission->name)
+                    ? 'yes'
+                    : 'no';
             }
 
             $data[$index] = $rowData;
