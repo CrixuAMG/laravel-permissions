@@ -2,7 +2,6 @@
 
 namespace CrixuAMG\Permissions\Services;
 
-use CrixuAMG\Permissions\Models\Role;
 use CrixuAMG\Permissions\Traits\BuildsRoles;
 use Illuminate\Database\Seeder;
 
@@ -74,17 +73,28 @@ abstract class AbstractPermissionSeeder extends Seeder
     {
         $users = config('permissions.user_model')::with('roles')
             ->get();
+        $permissionModel = config('permissions.models.permissions');
 
         foreach ($this->permissionsForRoles as $role => $assignedPermissions) {
+            // Get the role model
             $role = config('permissions.models.roles')::whereName($role)->first();
 
+            // Remove the current permissions
             $role->permissions()->detach();
 
             foreach ($assignedPermissions as $permission) {
-                $role->permissions()->attach(config('permissions.models.permissions')::firstOrCreate([
-                    'name'       => sprintf('%s:update', $permission),
-                    'guard_name' => config('permissions.guards.default'),
-                ]));
+                // First check if the role does not have the permission already
+                if (!$role->hasPermissionTo($permission)) {
+                    $permission = $permission instanceof $permissionModel
+                        ? $permission->name
+                        : $permission;
+
+                    // The role does not have the permission yet, add it now
+                    $role->permissions()->attach(config('permissions.models.permissions')::firstOrCreate([
+                        'name'       => sprintf('%s:update', $permission),
+                        'guard_name' => config('permissions.guards.default'),
+                    ]));
+                }
             }
 
             $users->each(function ($user) use ($role) {
