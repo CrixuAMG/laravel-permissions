@@ -1,6 +1,6 @@
 <?php
 
-namespace CrixuAMG\Console\Commands;
+namespace CrixuAMG\Permissions\Console\Commands;
 
 use Illuminate\Console\Command;
 
