@@ -3,6 +3,7 @@
 namespace CrixuAMG\Permissions;
 
 use CrixuAMG\Permissions\Console\Commands\RolePermissionTableCommand;
+use CrixuAMG\Permissions\Console\Commands\RoutePermissionCommand;
 use CrixuAMG\Permissions\Services\RoleDefiner;
 use Illuminate\Support\ServiceProvider;
 
@@ -50,6 +51,7 @@ class PermissionServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 RolePermissionTableCommand::class,
+                RoutePermissionCommand::class,
             ]);
         }
     }
