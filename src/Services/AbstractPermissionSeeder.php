@@ -32,6 +32,22 @@ abstract class AbstractPermissionSeeder extends Seeder
     /**
      *
      */
+    public function run()
+    {
+        /**
+         * Set up the permissions for the roles
+         */
+        $this->buildPermissions();
+
+        /**
+         * Give the permissions to the roles
+         */
+        $this->givePermissions();
+    }
+
+    /**
+     *
+     */
     private function setup()
     {
         $this->roles = config('permissions.roles');

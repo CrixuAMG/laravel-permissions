@@ -37,14 +37,12 @@ class RolePermissionTableCommand extends Command
      */
     public function handle()
     {
-        $roles = config('permissions.models.roles')::with('permissions')->get();
+        $roles       = config('permissions.models.roles')::with('permissions')->get();
         $permissions = config('permissions.models.permissions')::all();
-
-        $headers = [
+        $headers     = [
             '',
         ];
-        $data = [];
-
+        $data        = [];
         foreach ($roles as $role) {
             $headers[] = $role->name;
         }
@@ -57,10 +55,8 @@ class RolePermissionTableCommand extends Command
                     ? 'yes'
                     : 'no';
             }
-
             $data[$index] = $rowData;
         }
-
         $this->table($headers, $data);
     }
 }

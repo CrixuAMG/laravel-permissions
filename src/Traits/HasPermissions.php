@@ -1,7 +1,7 @@
 <?php
 
 namespace CrixuAMG\Permissions\Traits;
-use CrixuAMG\Permissions\Services\BasePermission;
+
 use CrixuAMG\Permissions\Services\BaseRole;
 
 /**
@@ -50,5 +50,25 @@ trait HasPermissions
 
             return false;
         }
+    }
+
+    /**
+     * Determine if the model has all of the given permissions.
+     *
+     * @param array ...$permissions
+     *
+     * @return bool
+     */
+    public function hasAllPermissions(...$permissions): bool
+    {
+        if (is_array($permissions[0])) {
+            $permissions = $permissions[0];
+        }
+        foreach ($permissions as $permission) {
+            if (!$this->hasPermission($permission)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
