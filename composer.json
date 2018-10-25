@@ -9,7 +9,7 @@
     "roles"
   ],
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.2",
     "laravel/framework": "5.*"
   },
   "authors": [

@@ -65,7 +65,7 @@ trait HasRoles
     {
         $this->roles()->detach();
 
-        return $this->assignRole($roles);
+        return $this->assignRole(...$roles);
     }
 
     /**
